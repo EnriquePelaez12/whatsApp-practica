@@ -30,7 +30,7 @@ class ChatPage extends StatelessWidget {
                 child: MessageList(messages: snapshot.data),
               ),
               MessageBox(onSend: (text) {
-                print(text);
+                db.sendMessage(group.id, Message(text));
               })
             ],
           );
