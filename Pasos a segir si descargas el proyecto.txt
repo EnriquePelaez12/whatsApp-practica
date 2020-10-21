@@ -1,0 +1,200 @@
+-------------------------------------------------------------------------------------
+Pasos para crear un proyecto de flutter y conectarlo a firebase,
+ejecutar los primeros comandos desde el cmd
+
+-Puedes revisar el siguiente video explica paso a paso
+https://www.youtube.com/watch?v=osp1WL7W9Wo&t=2017s&ab_channel=PauFern%C3%A1ndez
+--------------------------------------------------------------------------------------
+
+- flutter create --org com.example AquivaElNombre   -->  Crea un proyecto para firebase, si tienes un   dominio agregalo alli si no solo pon com.example y posteriormente el nombre del proyecto
+- cd code .  ---> para entrar al proyecto
+- code .  ---> para abrirlo con visual estudio code el proyecto creado
+- Despues dirijiste a firebase y seleccionar en conectar aplicacion de anndroid
+  y buscar en la ruta del proyecto android/app/src/main/androidManifest.xml en la segunda linea
+  en packege="AquiestaElnombre", copiar el nombre y pegarlo en firebase donde lo necesita
+- descargar el archivo con los permisos desde firebase y ponerlo en la siguente ruta dentro del proyecto
+  nombreDelProyecto\android\app no subir este archivo a git
+- Siga los pasos que muestra en firebase
+
+-Antes de compilar el proyecto 
+ revisar que en build.gradle en la linea 43 este de la siguiente manera 
+ ya que si no tiene  21 o 23(se recomienta usar 23) puede surgir un errorminSdkVersion 21, es error de la 
+ version
+ 
+- Despues agregar firebase a flatter entrar a Pubspec.tamy y dentro de dependencies ingresar 
+  cloud_firestore: ^0.13.0+1  clic derecho y seleccionar -> Get package
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+  cloud_firestore: ^0.13.0+1    (^0.14.1+3 o poner esa se remienda la 13 ) 
+
+  Debe estar ordenado para que se instalen correctamente de no ser asi no se van a instalar las   dependencias
+
+- conecta el celular o con tu emulador de android y preciona f8
+
+- comenzara a correr el proyecto
+
+- si vas a consultar datos de firestore asegurate de tener permisos de escritura
+ Ejemplo:
+
+  match /AquiVaElNombreDeLaColeccion/{document=**}{
+    allow read, write, update, delete: if true
+    }
+-----------------------------------------------------------------------------------------------
+SI DESCARGAS FLUTTER DE GIT DEBES IR A 
+
+1.-Despues dirijiste a firebase y seleccionar en conectar aplicacion de anndroid
+  y buscar en la ruta del proyecto android/app/src/main/androidManifest.xml en la segunda linea
+  en packege="AquiestaElnombre", copiar el nombre y pegarlo en firebase donde lo necesita
+
+2.- descargar el archivo con los permisos desde firebase y ponerlo en la siguente ruta dentro del proyecto
+  nombreDelProyecto\android\app no subir este archivo a git
+
+3.- Siga los pasos que muestra en firebase
+
+
+4.-Antes de compilar el proyecto 
+ revisar que en build.gradle en la linea 43 este de la siguiente manera 
+ ya que si no tiene  21 o 23(se recomienta usar 23) puede surgir un errorminSdkVersion 21, es error de la 
+ version
+ 
+- Despues agregar firebase a flatter entrar a Pubspec.tamy y dentro de dependencies ingresar 
+  cloud_firestore: ^0.13.0+1  clic derecho y seleccionar -> Get package
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+  cloud_firestore: ^0.13.0+1    (^0.14.1+3 o poner esa se remienda la 13 ) 
+
+  Debe estar ordenado para que se instalen correctamente de no ser asi no se van a instalar las   dependencias
+
+- conecta el celular o con tu emulador de android y preciona f8
+
+- comenzara a correr el proyecto
+
+COMENTARIO EXTRA - Agregar firebase a flatter entrar a Pubspec.tamy y dentro de dependencies ver la vercion   de   cloud_firebase y si esta escrito entonces no escribas y solo clic derecho y seleccionar -> Get     packag   para descargar la los paquetes, sino tiene version ingresar 
+  cloud_firestore: ^0.13.0+1  clic derecho y seleccionar -> Get package
+
+
+
+-----------------------------------------------------------------------------------------------------
+     COOMANDOS GENERALES FLUTTER
+
+
+flutter doctor        -------------------  Saber que tengo instalado todo en el ambiente 
+flutter emulators --launch API30  ******* abiri emulador
+flutter emulators    -------------------  Para saber que emuladores tengo 
+Para actualizar a la última versión, ejecute "flutter upgrade".
+code .  ---> para abrirlo con visual estudio code
+
+- alt + shif + o -> para borar imports que no se usan
+- ctrl + p  y escribes >debug painting ---> de esta forma ves la alineacion del contenido y para quitar las   lineas de la ap preciona ctrl + p y escribe >Flutter: toggle Debug Painting
+
+Para renosmbrar una variable o metodo seleccionar el metodo(dar doble clic Izq) y dar cliv derecho seleccionar 
+Rename symbol o precionar f2, posteriro mente escribir el nombre y despues dar enter
+
+shif+alt+f para dar formato al documento
+
+code .     para abrir el proyecto con VSC
+
+ctrl + h para borrar comentarios y escribir //.*$\n  recuerda seleccionar el asterisco para sombrear todo 
+y despues darle clic en el incono remplazar todo
+
+Agregar firebase a flatter entrar a Pubspec.tamy y dentro de dependencies ingresar 
+cloud_firestore: ^0.13.0+1  clic derecho y seleccionar -> Get package
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.0
+  cloud_firestore: ^0.14.1+3
+
+Debe estar ordenado para que se instalen correctamente de no ser asi no se van a instalar las dependencias
+
+DIR  --> El comando lista el contenido del directorio o carpeta donde te encuentras, mostrando todas las subcarpetas 
+
+
+para importar desde una clase el codigo - ctrl + . - y seleccionar material.dart
+
+
+stw y seleccionar que que nececitas ya sea StatelessWidget o StatefulWidget
+print(val);  --> para imprimir
+
+--------------------------------------------------------------------
+flutter create AquiVaElNombre   ---> comando para crea un proyecto
+cd AquiVaElNombre               ---> para ingresar al proyecto 
+open devTools      ********************** Abre un tipo inspector
+--------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+Link error cuando sale el error al principio pero si compila 
+
+46 hacer esto -> Cambiar archivo settings.gradlea este
+https://stackoverflow.com/questions/61732409/plugin-project-firebase-core-web-not-found
+-------------------------------------------------------------------------
+EJEMPLO DE COMO ESCRIBIR REGLAS EN FIREBASE
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false        
+    }
+    match /users/{document=**}{
+    allow read, write, update, delete: if true
+    }
+    match /groups/{document=**}{
+    allow read, write, update, delete: if true
+    }
+  }
+}
+
+
+---------------------------------------------------------------------------------------
+INTEGRAR GIT A MI PROYECTO DE FLUTTER DESDE VSC
+
+1.- Precionar boton de la izquierda de icono compartir 
+2.- debes dar clic en el icono + donde dice Changes para agregar todo a git y despues esribir un comentarios
+    shif + enter para dar u salto de linea y ctrl + enter para guardar un comit
+
+__________________________________________________________________________________________
+O intentalo con comandos
+
+1.-git init 
+
+para iniciar el iniciar
+
+2.-git add -A
+
+para que agrege todo
+
+3.-git commit -m "mensaje"
+
+para hacer el commit
+
+4.-git remote add origin quivaladirecciondelrepositorioremoto
+
+para enlazar al repositorio remoto antes tenemos que checar con este comando <git remote -v>
+que no estemos conectados a algun repositorio si estamos conectados ejecuta el siguinete comando para desconestarte
+<git remote remove origin>
+
+5.-git push origin master
+
+es para subir la informacion a nuestro repositorio remoto 
+
+
+
+
+
+Escribe la abreviacion stless para agregar un StatelessWidget a una clase nueva de dart
+---------------------------------------------------------------------------------------
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'model/group.dart';
+//recibe los datos y los mapea
+Stream<List<Group>> getGroups() {
+  return Firestore.instance.collection('groups').snapshots().map(toGroupList);
+}
+
+Stream<List<Message>> getGroupMessages(String groupId){
+  return Firestore.instance.collection('groups/$groupId/messages').snapshot().map(toMessageList);
+}
