@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp1/model/message.dart';
 
+import 'message_widget.dart';
+
 class MessageList extends StatelessWidget {
   const MessageList({
     @required this.messages,
@@ -14,9 +16,9 @@ class MessageList extends StatelessWidget {
       reverse: true,
       itemCount: messages.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(messages[index].text),
-          subtitle: Text(messages[index].datetime.toString()),
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 7),
+          child: MessageWidget(messages[index]),
         );
       },
     );
