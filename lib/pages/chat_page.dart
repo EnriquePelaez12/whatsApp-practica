@@ -3,6 +3,7 @@ import 'package:whatsapp1/db.dart' as db; //para usar solo la variable db
 import 'package:whatsapp1/model/group.dart';
 import 'package:whatsapp1/model/message.dart';
 import 'package:whatsapp1/widgets/loading.dart';
+import 'package:whatsapp1/widgets/message_box.dart';
 import 'package:whatsapp1/widgets/message_list.dart';
 import 'package:whatsapp1/widgets/red_error.dart';
 
@@ -22,7 +23,16 @@ class ChatPage extends StatelessWidget {
           if (!snapshot.hasData) {
             return Loading();
           }
-          return MessageList(messages: snapshot.data);
+          return Column(
+            children: <Widget>[
+              Expanded(
+                child: MessageList(messages: snapshot.data),
+              ),
+              MessageBox(onSend: (text) {
+                print(text);
+              })
+            ],
+          );
         },
       ),
     );
