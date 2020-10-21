@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp1/db.dart' as db;
 import 'package:whatsapp1/model/group.dart';
-import 'package:whatsapp1/widgets/group_tile.dart';
+import 'package:whatsapp1/widgets/group_list.dart';
+import 'package:whatsapp1/widgets/loading.dart';
+import 'package:whatsapp1/widgets/red_error.dart';
 
 class GroupPage extends StatelessWidget {
   @override
@@ -13,33 +15,12 @@ class GroupPage extends StatelessWidget {
         // stream: Firestore.instance.collection('groups').snapshots(),
         builder: (context, AsyncSnapshot<List<Group>> snapshot) {
           if (snapshot.hasError) {
-            return Center(
-              child: Text(
-                snapshot.error.toString(),
-                style: TextStyle(backgroundColor: Colors.red),
-              ),
-            );
+            return RedError(snapshot.error);
           }
           if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Loading();
           }
-          List<Group> groups = snapshot.data;
-          return ListView.separated(
-            itemCount: groups.length,
-            itemBuilder: (context, index) {
-              return GroupTile(groups[index]);
-            },
-            separatorBuilder: (context, index) {
-              return Divider(
-                //divicion entre cada mensaje
-                height: 1,
-                indent: 75,
-                endIndent: 15,
-              );
-            },
-          );
+          return GroupList(groups: snapshot.data);
         },
       ),
     );
